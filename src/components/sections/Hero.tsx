@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Phone, Calendar, MapPin, Star } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ParallaxLayer } from "@/components/animations/ParallaxLayer";
@@ -128,14 +129,21 @@ export function Hero() {
 
         {/* Visual column */}
         <div className="lg:col-span-5 relative h-[420px] lg:h-[520px]">
-          {/* Mid layer: truck "photo" */}
+          {/* Mid layer: branded service truck */}
           <ParallaxLayer
             speed={0.5}
             className="absolute inset-0 flex items-center justify-center"
           >
-            <div className="relative w-full max-w-md">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-700 to-brand-blue-900 shadow-2xl">
-                <TruckPlaceholder />
+            <div className="relative w-full max-w-xl">
+              <div className="aspect-[5/4] rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-700 to-brand-blue-900 shadow-2xl">
+                <Image
+                  src="/images/truck.png"
+                  alt="Paradigm Services branded service truck with mountain backdrop"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 90vw, 560px"
+                  className="object-cover"
+                />
               </div>
             </div>
           </ParallaxLayer>
@@ -188,73 +196,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-function TruckPlaceholder() {
-  return (
-    <div className="w-full h-full relative">
-      <svg
-        viewBox="0 0 320 400"
-        className="absolute inset-0 w-full h-full"
-        aria-label="Branded service truck illustration (placeholder for production photo)"
-      >
-        <defs>
-          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#1e5aa8" />
-            <stop offset="100%" stopColor="#0b2545" />
-          </linearGradient>
-        </defs>
-        <rect width="320" height="400" fill="url(#sky)" />
-        {/* Sun glow */}
-        <circle cx="240" cy="80" r="60" fill="#f4801a" opacity="0.4" />
-        <circle cx="240" cy="80" r="30" fill="#f4801a" opacity="0.7" />
-        {/* Ground */}
-        <rect y="300" width="320" height="100" fill="#0b2545" />
-        {/* Road stripes */}
-        <rect x="0" y="340" width="40" height="6" fill="#fff" opacity="0.4" />
-        <rect x="80" y="340" width="40" height="6" fill="#fff" opacity="0.4" />
-        <rect x="160" y="340" width="40" height="6" fill="#fff" opacity="0.4" />
-        <rect x="240" y="340" width="40" height="6" fill="#fff" opacity="0.4" />
-        {/* Truck body */}
-        <rect x="40" y="200" width="220" height="100" rx="8" fill="#fff" />
-        <rect x="50" y="170" width="80" height="40" rx="6" fill="#e5e3dc" />
-        {/* Truck branding */}
-        <rect x="60" y="220" width="180" height="50" rx="4" fill="#1e5aa8" />
-        <text
-          x="150"
-          y="244"
-          textAnchor="middle"
-          fontFamily="system-ui, sans-serif"
-          fontSize="14"
-          fontWeight="700"
-          fill="#fff"
-        >
-          PARADIGM
-        </text>
-        <text
-          x="150"
-          y="262"
-          textAnchor="middle"
-          fontFamily="system-ui, sans-serif"
-          fontSize="9"
-          fill="#5aa1e8"
-        >
-          PLUMBING · GAS · DRAINS
-        </text>
-        {/* Orange stripe */}
-        <rect x="40" y="195" width="220" height="6" fill="#f4801a" />
-        {/* Wheels */}
-        <circle cx="75" cy="305" r="18" fill="#1a1f2b" />
-        <circle cx="75" cy="305" r="9" fill="#6b7484" />
-        <circle cx="225" cy="305" r="18" fill="#1a1f2b" />
-        <circle cx="225" cy="305" r="9" fill="#6b7484" />
-        {/* Reflection on body */}
-        <rect x="40" y="200" width="220" height="20" fill="#fff" opacity="0.3" />
-      </svg>
-      <div className="absolute bottom-3 left-3 right-3 text-[10px] text-white/70 uppercase tracking-wider">
-        Placeholder · swap with branded truck photo
-      </div>
-    </div>
   );
 }
