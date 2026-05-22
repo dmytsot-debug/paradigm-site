@@ -29,8 +29,14 @@ export function TestimonialsCarousel() {
 
   const totalPages = Math.max(1, Math.ceil(TESTIMONIALS.length / perPage));
 
+  // Clamp page when totalPages shrinks (e.g. resize from mobile→desktop).
+  useEffect(() => {
+    setPage((p) => (p >= totalPages ? 0 : p));
+  }, [totalPages]);
+
   // Auto-advance
   useEffect(() => {
+    if (totalPages <= 1) return;
     const id = setInterval(() => {
       if (pausedRef.current) return;
       setPage((p) => (p + 1) % totalPages);
@@ -38,21 +44,24 @@ export function TestimonialsCarousel() {
     return () => clearInterval(id);
   }, [totalPages]);
 
-  // Animate slide
+  // Animate slide.
+  // The track has width = totalPages * 100% of its parent, so 100% of the
+  // track = totalPages * viewport-width. To advance ONE page (one viewport)
+  // we translate by -(100 / totalPages)% of the track, NOT -100%.
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
-    const offset = -(page * 100);
+    const offsetPct = totalPages > 0 ? -(page * 100) / totalPages : 0;
     if (prefersReducedMotion()) {
-      track.style.transform = `translateX(${offset}%)`;
+      track.style.transform = `translateX(${offsetPct}%)`;
       return;
     }
     animate(track, {
-      translateX: `${offset}%`,
+      translateX: `${offsetPct}%`,
       duration: 800,
       ease: easing.outQuart,
     });
-  }, [page]);
+  }, [page, totalPages]);
 
   return (
     <section className="py-20 lg:py-28 bg-background-subtle/60 border-y border-border">
@@ -67,7 +76,7 @@ export function TestimonialsCarousel() {
             </h2>
           </div>
           <a
-            href={SITE.google}
+            href={SITE.googleReviews}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-medium text-brand-blue-700 dark:text-brand-blue-300 hover:underline underline-offset-4"

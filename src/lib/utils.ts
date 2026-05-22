@@ -14,8 +14,14 @@ export const SITE = {
   email: "info@paradigmplumbinggas.com",
   emailHref: "mailto:info@paradigmplumbinggas.com",
   instagram: "https://www.instagram.com/paradigmservices.ca/",
+  /** Canonical "open in Google Maps" URL — uses the documented Maps URL
+   *  scheme that always resolves to the matching business listing.
+   *  Docs: https://developers.google.com/maps/documentation/urls/get-started */
   google:
-    "https://www.google.ca/maps/place/Paradigm+Services+and+Installations+LTD./@49.2968047,-122.8089641,15z",
+    "https://www.google.com/maps/search/?api=1&query=Paradigm+Services+and+Installations+LTD+Coquitlam+BC",
+  /** Direct "Read reviews" deep link — same query, opens the reviews tab. */
+  googleReviews:
+    "https://search.google.com/local/reviews?q=Paradigm+Services+and+Installations+LTD",
   url: "https://paradigmservices.ca",
   description:
     "Plumbing, gas fitting, drain cleaning, water heaters, and electrical services across Metro Vancouver. 24/7 emergency response.",
