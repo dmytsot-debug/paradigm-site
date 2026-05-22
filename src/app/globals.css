@@ -191,3 +191,72 @@ body {
     opacity: 0.35;
   }
 }
+
+/* ─── Leaflet branded markers ──────────────────────────────────────────── */
+.paradigm-marker {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  pointer-events: auto;
+}
+.paradigm-marker-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--brand-orange);
+  opacity: 0.35;
+  animation: pulse-marker 2400ms ease-in-out infinite;
+}
+.paradigm-marker-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  background: var(--brand-orange);
+  border: 2px solid #fff;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 220ms ease;
+}
+.paradigm-marker--active .paradigm-marker-dot {
+  transform: scale(1.6);
+  background: var(--brand-orange-button);
+}
+.paradigm-marker--active .paradigm-marker-pulse {
+  background: var(--brand-orange-button);
+  opacity: 0.5;
+}
+
+/* Tooltip styling override */
+.leaflet-tooltip.paradigm-tooltip {
+  background: var(--brand-blue-900);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+.leaflet-tooltip.paradigm-tooltip::before {
+  border-top-color: var(--brand-blue-900);
+}
+.leaflet-container {
+  background: var(--background-subtle);
+  font-family: var(--font-sans);
+}
+.leaflet-container a {
+  color: var(--brand-blue-600);
+}
+.dark .leaflet-control-attribution {
+  background: rgba(11, 37, 69, 0.75);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paradigm-marker-pulse {
+    animation: none;
+  }
+}

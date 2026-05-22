@@ -1,23 +1,32 @@
 export type ServiceCity = {
   name: string;
-  /** Normalized 0-1 position on the schematic Lower-Mainland SVG (origin top-left). */
-  x: number;
-  y: number;
+  /** Real-world latitude (decimal degrees). */
+  lat: number;
+  /** Real-world longitude (decimal degrees). */
+  lng: number;
 };
 
+/** Cities we cover, ordered roughly NW → SE for the legend list. */
 export const SERVICE_AREA: ServiceCity[] = [
-  { name: "Squamish", x: 0.18, y: 0.05 },
-  { name: "Whistler", x: 0.1, y: 0.0 },
-  { name: "West Vancouver", x: 0.22, y: 0.28 },
-  { name: "North Vancouver", x: 0.32, y: 0.3 },
-  { name: "Vancouver", x: 0.26, y: 0.46 },
-  { name: "Burnaby", x: 0.42, y: 0.48 },
-  { name: "New Westminster", x: 0.5, y: 0.58 },
-  { name: "Port Moody", x: 0.54, y: 0.4 },
-  { name: "Coquitlam", x: 0.6, y: 0.46 },
-  { name: "Port Coquitlam", x: 0.66, y: 0.5 },
-  { name: "Pitt Meadows", x: 0.74, y: 0.52 },
-  { name: "Maple Ridge", x: 0.82, y: 0.5 },
-  { name: "Surrey", x: 0.58, y: 0.72 },
-  { name: "Langley", x: 0.78, y: 0.78 },
+  { name: "Whistler", lat: 50.1163, lng: -122.9574 },
+  { name: "Squamish", lat: 49.7016, lng: -123.1558 },
+  { name: "West Vancouver", lat: 49.3286, lng: -123.1592 },
+  { name: "North Vancouver", lat: 49.3163, lng: -123.0747 },
+  { name: "Vancouver", lat: 49.2827, lng: -123.1207 },
+  { name: "Burnaby", lat: 49.2488, lng: -122.9805 },
+  { name: "Port Moody", lat: 49.2849, lng: -122.8313 },
+  { name: "Coquitlam", lat: 49.2838, lng: -122.7932 },
+  { name: "New Westminster", lat: 49.2057, lng: -122.911 },
+  { name: "Port Coquitlam", lat: 49.2628, lng: -122.7811 },
+  { name: "Pitt Meadows", lat: 49.2335, lng: -122.6896 },
+  { name: "Maple Ridge", lat: 49.2193, lng: -122.6019 },
+  { name: "Surrey", lat: 49.1913, lng: -122.849 },
+  { name: "Langley", lat: 49.1042, lng: -122.6604 },
 ];
+
+/** Reasonable centre/zoom for fitting the whole service area in a desktop tile. */
+export const SERVICE_AREA_VIEW = {
+  centerLat: 49.45,
+  centerLng: -122.85,
+  zoom: 9,
+} as const;

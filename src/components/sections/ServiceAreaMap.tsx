@@ -1,32 +1,45 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { animate, stagger } from "animejs";
+import dynamic from "next/dynamic";
+import { Loader2, MapPin } from "lucide-react";
 import { SERVICE_AREA } from "@/content/service-area";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { easing, prefersReducedMotion } from "@/lib/anime/presets";
+
+const LeafletServiceMap = dynamic(() => import("./LeafletServiceMap"), {
+  ssr: false,
+  loading: () => <MapSkeleton />,
+});
+
+function MapSkeleton() {
+  return (
+    <div className="absolute inset-0 rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-100 to-brand-blue-300/40 dark:from-brand-blue-800/60 dark:to-brand-blue-700/40 flex flex-col items-center justify-center gap-3 text-foreground-muted">
+      <Loader2 className="size-6 animate-spin" />
+      <span className="text-sm">Loading map…</span>
+    </div>
+  );
+}
 
 export function ServiceAreaMap() {
-  const wrapRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<string | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
 
+  // Defer Leaflet bundle + tile fetches until the section is near the viewport.
   useEffect(() => {
-    const root = wrapRef.current;
-    if (!root) return;
-    if (prefersReducedMotion()) return;
-
-    const markers = root.querySelectorAll<SVGCircleElement>("[data-marker]");
-    const anim = animate(markers, {
-      scale: [1, 1.6, 1],
-      opacity: [0.85, 0.35, 0.85],
-      duration: 1200,
-      ease: easing.inOutQuad,
-      loop: true,
-      delay: stagger(200),
-    });
-    return () => {
-      anim.pause();
-    };
+    const el = wrapRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoad(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   return (
@@ -46,90 +59,16 @@ export function ServiceAreaMap() {
         </div>
 
         <ScrollReveal as="div" className="mt-12 grid lg:grid-cols-12 gap-10">
-          <div ref={wrapRef} className="lg:col-span-7">
-            <div className="aspect-[4/3] bg-surface rounded-2xl border border-border shadow-sm overflow-hidden relative">
-              <svg
-                viewBox="0 0 800 600"
-                className="absolute inset-0 w-full h-full"
-                aria-label="Schematic map of Lower Mainland service area"
-              >
-                <defs>
-                  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="var(--brand-blue-100)" />
-                    <stop offset="100%" stopColor="var(--brand-blue-300)" />
-                  </linearGradient>
-                  <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#f3f1ec" />
-                    <stop offset="100%" stopColor="#e5e3dc" />
-                  </linearGradient>
-                </defs>
-                <rect width="800" height="600" fill="url(#water)" />
-                {/* Simplified land masses */}
-                <path
-                  d="M0,200 Q150,150 300,200 L350,300 Q450,250 600,310 L800,280 L800,600 L0,600 Z"
-                  fill="url(#land)"
-                  opacity="0.9"
-                />
-                <path
-                  d="M100,180 Q250,140 400,200 L500,250 Q600,220 760,250 L760,310 Q620,290 500,310 L400,280 Q250,290 100,250 Z"
-                  fill="url(#land)"
-                  opacity="0.95"
-                />
-                {/* Inlet line */}
-                <path
-                  d="M120,230 Q260,250 380,270 Q500,280 700,275"
-                  stroke="var(--brand-blue-400)"
-                  strokeWidth="2"
-                  fill="none"
-                  opacity="0.4"
-                />
-                {/* Markers */}
-                {SERVICE_AREA.map((c) => {
-                  const isActive = active === c.name;
-                  return (
-                    <g key={c.name}>
-                      <circle
-                        data-marker
-                        data-city={c.name}
-                        cx={c.x * 800}
-                        cy={c.y * 600 + 80}
-                        r="6"
-                        fill="var(--brand-orange)"
-                        style={{ transformOrigin: `${c.x * 800}px ${c.y * 600 + 80}px` }}
-                      />
-                      <circle
-                        cx={c.x * 800}
-                        cy={c.y * 600 + 80}
-                        r="3"
-                        fill="var(--brand-orange-600)"
-                      />
-                      {isActive && (
-                        <g>
-                          <rect
-                            x={c.x * 800 - 50}
-                            y={c.y * 600 + 56}
-                            width="100"
-                            height="20"
-                            rx="4"
-                            fill="var(--brand-blue-900)"
-                          />
-                          <text
-                            x={c.x * 800}
-                            y={c.y * 600 + 70}
-                            textAnchor="middle"
-                            fontFamily="system-ui, sans-serif"
-                            fontSize="11"
-                            fontWeight="600"
-                            fill="#fff"
-                          >
-                            {c.name}
-                          </text>
-                        </g>
-                      )}
-                    </g>
-                  );
-                })}
-              </svg>
+          <div className="lg:col-span-7">
+            <div
+              ref={wrapRef}
+              className="relative aspect-[4/3] bg-surface rounded-2xl border border-border shadow-sm overflow-hidden"
+            >
+              {shouldLoad ? (
+                <LeafletServiceMap activeCity={active} />
+              ) : (
+                <MapSkeleton />
+              )}
             </div>
           </div>
 
@@ -143,12 +82,10 @@ export function ServiceAreaMap() {
                     onMouseLeave={() => setActive(null)}
                     onFocus={() => setActive(c.name)}
                     onBlur={() => setActive(null)}
-                    className="text-left text-foreground hover:text-brand-orange transition-colors"
+                    className="text-left text-foreground hover:text-brand-orange transition-colors inline-flex items-center gap-2"
                   >
-                    <span className="inline-flex items-center gap-2">
-                      <span className="size-1.5 rounded-full bg-brand-orange/70" />
-                      {c.name}
-                    </span>
+                    <MapPin className="size-3.5 text-brand-orange/70" />
+                    {c.name}
                   </button>
                 </li>
               ))}
