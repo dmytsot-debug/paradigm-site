@@ -20,17 +20,16 @@ export function CtaStrip() {
       />
       <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-900 via-brand-blue-900/85 to-transparent pointer-events-none" />
 
-      <div className="container-prose relative py-16 lg:py-24 grid lg:grid-cols-12 items-center gap-8">
-        <div className="lg:col-span-8">
-          <h2 className="font-display text-3xl lg:text-5xl font-bold tracking-tight text-balance">
+      <div className="container-prose relative pt-14 pb-12 lg:pt-20 lg:pb-16 grid lg:grid-cols-12 items-center gap-8 border-b border-white/10">
+        <div className="lg:col-span-7">
+          <h2 className="font-display text-2xl lg:text-4xl font-bold tracking-tight text-balance">
             Need a plumber today?
           </h2>
-          <p className="mt-3 text-white/80 text-lg max-w-xl">
-            Call {SITE.phone} or request an estimate — we&apos;ll get back to
-            you fast.
+          <p className="mt-2 text-white/75 text-base lg:text-lg max-w-xl">
+            Call {SITE.phone} or request an estimate.
           </p>
         </div>
-        <div className="lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
+        <div className="lg:col-span-5 flex flex-wrap gap-3 lg:justify-end">
           <Button href={SITE.phoneHref} size="lg" variant="primary">
             <Phone className="size-4" />
             {SITE.phone}

@@ -64,7 +64,7 @@ export function TestimonialsCarousel() {
   }, [page, totalPages]);
 
   return (
-    <section className="py-20 lg:py-28 bg-background-subtle/60 border-y border-border">
+    <section className="py-16 lg:py-24 bg-background-subtle/60 border-y border-border">
       <div className="container-prose">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div className="max-w-xl">

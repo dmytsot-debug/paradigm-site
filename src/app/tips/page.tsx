@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function TipsPage() {
   return (
     <>
-      <section className="pt-16 pb-10 lg:pt-24 lg:pb-12 bg-gradient-to-b from-brand-blue-100/40 to-background dark:from-brand-blue-700/30">
+      <section className="pt-12 pb-8 lg:pt-20 lg:pb-12 bg-gradient-to-b from-brand-blue-100/40 to-background dark:from-brand-blue-700/30">
         <div className="container-prose max-w-3xl">
           <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold">
             Tips

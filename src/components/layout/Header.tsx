@@ -37,7 +37,7 @@ export function Header() {
           : "bg-background/0 border-b border-transparent",
       )}
     >
-      <div className="container-prose flex items-center justify-between h-16 lg:h-20">
+      <div className="container-prose flex items-center justify-between h-14 lg:h-16">
         <Link
           href="/"
           className="flex items-center gap-2 hover:opacity-90 transition-opacity"

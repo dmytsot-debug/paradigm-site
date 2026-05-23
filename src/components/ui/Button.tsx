@@ -35,24 +35,38 @@ type CommonProps = VariantProps<typeof buttonStyles> & {
 type LinkProps = CommonProps & {
   href: string;
   external?: boolean;
-} & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | keyof CommonProps>;
+} & Omit<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    "href" | keyof CommonProps
+  >;
 
 type ButtonProps = CommonProps & {
   href?: undefined;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof CommonProps>;
 
 export function Button(props: LinkProps | ButtonProps) {
-  const { className, variant, size, children } = props;
-  const styles = cn(buttonStyles({ variant, size }), className);
-
   if ("href" in props && props.href !== undefined) {
-    const { href, external, ...rest } = props as LinkProps;
-    if (external || href.startsWith("tel:") || href.startsWith("mailto:") || href.startsWith("http")) {
+    // Destructure ALL styling-related keys out of rest, so the spread below
+    // cannot overwrite the computed className. Without this, a caller that
+    // passes className="w-full" would erase the variant/size classes.
+    const { className, variant, size, children, href, external, ...rest } =
+      props;
+    const styles = cn(buttonStyles({ variant, size }), className);
+
+    const isAbsolute =
+      external ||
+      href.startsWith("tel:") ||
+      href.startsWith("mailto:") ||
+      href.startsWith("http");
+
+    if (isAbsolute) {
       return (
         <a
           href={href}
           className={styles}
-          {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          {...(external
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
           {...rest}
         >
           {children}
@@ -66,7 +80,8 @@ export function Button(props: LinkProps | ButtonProps) {
     );
   }
 
-  const { ...rest } = props as ButtonProps;
+  const { className, variant, size, children, ...rest } = props as ButtonProps;
+  const styles = cn(buttonStyles({ variant, size }), className);
   return (
     <button className={styles} {...rest}>
       {children}

@@ -43,7 +43,7 @@ export function ServiceAreaMap() {
   }, []);
 
   return (
-    <section className="py-20 lg:py-28 bg-brand-blue-100/30 dark:bg-brand-blue-700/20">
+    <section className="py-16 lg:py-24 bg-brand-blue-100/30 dark:bg-brand-blue-700/20">
       <div className="container-prose">
         <div className="max-w-2xl">
           <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold">

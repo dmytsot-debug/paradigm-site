@@ -26,7 +26,7 @@ const SEGMENTS = [
 
 export function WhoWeServe() {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="py-16 lg:py-24">
       <div className="container-prose">
         <div className="max-w-2xl">
           <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold">

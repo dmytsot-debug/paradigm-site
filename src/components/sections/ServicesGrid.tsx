@@ -7,7 +7,7 @@ export function ServicesGrid() {
   return (
     <section
       id="services"
-      className="py-20 lg:py-28 bg-background-subtle/60 border-y border-border"
+      className="py-16 lg:py-24 bg-background-subtle/60 border-y border-border"
     >
       <div className="container-prose">
         <div className="max-w-2xl">

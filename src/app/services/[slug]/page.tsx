@@ -43,11 +43,11 @@ export default async function ServicePage({
   if (!service) notFound();
   const Icon = service.icon;
 
-  const others = SERVICES.filter((s) => s.slug !== slug).slice(0, 3);
+  const others = SERVICES.filter((s) => s.slug !== slug);
 
   return (
     <>
-      <section className="pt-12 pb-12 lg:pt-20 lg:pb-16 bg-gradient-to-b from-brand-blue-100/40 to-background dark:from-brand-blue-700/30">
+      <section className="pt-10 pb-8 lg:pt-16 lg:pb-12 bg-gradient-to-b from-brand-blue-100/40 to-background dark:from-brand-blue-700/30">
         <div className="container-prose">
           <Link
             href="/services"

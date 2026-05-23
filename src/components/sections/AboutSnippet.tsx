@@ -4,7 +4,7 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export function AboutSnippet() {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="py-16 lg:py-24">
       <div className="container-prose grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <ScrollReveal as="div" className="lg:col-span-5">
           <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-100 to-brand-blue-300 dark:from-brand-blue-700 dark:to-brand-blue-900 relative">

@@ -26,7 +26,7 @@ const REASONS = [
 
 export function WhyChoose() {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="py-16 lg:py-24">
       <div className="container-prose">
         <div className="text-center max-w-2xl mx-auto">
           <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold">

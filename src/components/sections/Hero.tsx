@@ -15,7 +15,7 @@ const TAGS = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-10 lg:pt-16 pb-24 lg:pb-32">
+    <section className="relative overflow-hidden pt-8 lg:pt-12 pb-20 lg:pb-24">
       {/* Back layer: gradient + pipe SVG */}
       <ParallaxLayer
         speed={0.2}
