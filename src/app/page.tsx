@@ -6,12 +6,16 @@ import { ServiceAreaMap } from "@/components/sections/ServiceAreaMap";
 import { WhyChoose } from "@/components/sections/WhyChoose";
 import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel";
 import { CtaStrip } from "@/components/sections/CtaStrip";
-import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
+import {
+  JsonLd,
+  localBusinessSchema,
+  websiteSchema,
+} from "@/components/seo/JsonLd";
 
 export default function HomePage() {
   return (
     <>
-      <LocalBusinessJsonLd />
+      <JsonLd data={[localBusinessSchema(), websiteSchema()]} />
       <Hero />
       <AboutSnippet />
       <ServicesGrid />

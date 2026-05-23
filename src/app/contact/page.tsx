@@ -3,6 +3,7 @@ import { Phone, Mail, Instagram, Clock, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { SERVICE_AREA } from "@/content/service-area";
+import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -14,6 +15,12 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
       <section className="pt-12 pb-8 lg:pt-20 lg:pb-12 bg-gradient-to-b from-brand-blue-100/40 to-background dark:from-brand-blue-700/30">
         <div className="container-prose max-w-3xl">
           <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold">

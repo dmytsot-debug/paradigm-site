@@ -3,6 +3,7 @@ import { User, ShieldCheck, Wrench, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CtaStrip } from "@/components/sections/CtaStrip";
+import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -32,6 +33,12 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ])}
+      />
       <section className="pt-12 pb-8 lg:pt-20 lg:pb-12 bg-gradient-to-b from-brand-blue-100/40 to-background dark:from-brand-blue-700/30">
         <div className="container-prose max-w-3xl">
           <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold">

@@ -4,6 +4,11 @@ import { ArrowUpRight } from "lucide-react";
 import { SERVICES } from "@/content/services";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CtaStrip } from "@/components/sections/CtaStrip";
+import {
+  JsonLd,
+  breadcrumbSchema,
+  servicesItemListSchema,
+} from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Services — Plumbing, Gas, Drains, Water Heaters, Electrical",
@@ -14,6 +19,15 @@ export const metadata: Metadata = {
 export default function ServicesIndexPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+          servicesItemListSchema(SERVICES),
+        ]}
+      />
       <section className="pt-12 pb-8 lg:pt-20 lg:pb-12 bg-gradient-to-b from-brand-blue-100/40 to-background dark:from-brand-blue-700/30">
         <div className="container-prose max-w-3xl">
           <span className="text-xs uppercase tracking-widest text-brand-orange font-semibold">

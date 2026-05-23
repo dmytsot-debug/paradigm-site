@@ -7,6 +7,12 @@ import { Accordion } from "@/components/ui/Accordion";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CtaStrip } from "@/components/sections/CtaStrip";
+import {
+  JsonLd,
+  serviceSchema,
+  faqPageSchema,
+  breadcrumbSchema,
+} from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/utils";
 
 type Params = { slug: string };
@@ -47,6 +53,17 @@ export default async function ServicePage({
 
   return (
     <>
+      <JsonLd
+        data={[
+          serviceSchema(service),
+          faqPageSchema(service.faq),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: service.title, path: `/services/${service.slug}` },
+          ]),
+        ]}
+      />
       <section className="pt-10 pb-8 lg:pt-16 lg:pb-12 bg-gradient-to-b from-brand-blue-100/40 to-background dark:from-brand-blue-700/30">
         <div className="container-prose">
           <Link

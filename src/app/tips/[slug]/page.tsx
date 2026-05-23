@@ -5,6 +5,11 @@ import { ArrowLeft, Clock } from "lucide-react";
 import { TIPS } from "@/content/tips";
 import { CtaStrip } from "@/components/sections/CtaStrip";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import {
+  JsonLd,
+  blogPostingSchema,
+  breadcrumbSchema,
+} from "@/components/seo/JsonLd";
 
 type Params = { slug: string };
 
@@ -32,8 +37,19 @@ export default async function TipPage({
   const tip = TIPS.find((t) => t.slug === slug);
   if (!tip) notFound();
 
+  const path = `/tips/${tip.slug}`;
   return (
     <>
+      <JsonLd
+        data={[
+          blogPostingSchema(tip, path),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Tips", path: "/tips" },
+            { name: tip.title, path },
+          ]),
+        ]}
+      />
       <article className="py-16 lg:py-24">
         <div className="container-prose max-w-3xl">
           <Link
