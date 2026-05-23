@@ -91,7 +91,12 @@ export function Footer() {
             </li>
             <li className="text-white/80 flex items-start gap-2">
               <MapPin className="size-4 text-brand-orange shrink-0 mt-0.5" />
-              Metro Vancouver, BC
+              <address className="not-italic leading-relaxed">
+                {SITE.address.street}
+                <br />
+                {SITE.address.city}, {SITE.address.region}{" "}
+                {SITE.address.postalCode}
+              </address>
             </li>
             <li className="text-white/70 text-xs pt-2">{SITE.hours}</li>
           </ul>

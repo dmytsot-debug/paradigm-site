@@ -120,6 +120,18 @@ export default function ContactPage() {
 
             <div data-info className="bg-surface border border-border rounded-xl p-6">
               <h2 className="font-semibold text-lg flex items-center gap-2">
+                <MapPin className="size-5 text-brand-orange" /> Address
+              </h2>
+              <address className="mt-3 not-italic text-sm text-foreground leading-relaxed">
+                {SITE.address.street}
+                <br />
+                {SITE.address.city}, {SITE.address.region}{" "}
+                {SITE.address.postalCode}
+              </address>
+            </div>
+
+            <div data-info className="bg-surface border border-border rounded-xl p-6">
+              <h2 className="font-semibold text-lg flex items-center gap-2">
                 <MapPin className="size-5 text-brand-orange" /> Service area
               </h2>
               <ul className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm text-foreground-muted">
@@ -132,7 +144,9 @@ export default function ContactPage() {
             <div data-info className="rounded-xl overflow-hidden border border-border aspect-[4/3]">
               <iframe
                 title="Paradigm Services location on Google Maps"
-                src="https://www.google.com/maps?q=Paradigm+Services+and+Installations+LTD&output=embed"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(
+                  `${SITE.address.street}, ${SITE.address.city}, ${SITE.address.region} ${SITE.address.postalCode}`,
+                )}&output=embed`}
                 className="w-full h-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

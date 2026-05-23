@@ -13,6 +13,16 @@ export const SITE = {
   phoneHref: "tel:7789385311",
   email: "info@paradigmplumbinggas.com",
   emailHref: "mailto:info@paradigmplumbinggas.com",
+  address: {
+    street: "1386 Lincoln Dr",
+    city: "Port Coquitlam",
+    region: "BC",
+    postalCode: "V3B 7G6",
+    country: "CA",
+    /** Coordinates for the Lincoln Dr address (Nominatim / OSM). */
+    lat: 49.2787451,
+    lng: -122.7521507,
+  },
   instagram: "https://www.instagram.com/paradigmservices.ca/",
   /** Canonical "open in Google Maps" URL — uses the documented Maps URL
    *  scheme that always resolves to the matching business listing.

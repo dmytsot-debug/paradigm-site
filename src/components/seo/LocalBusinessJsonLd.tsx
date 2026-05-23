@@ -4,7 +4,9 @@ import { SERVICE_AREA } from "@/content/service-area";
 export function LocalBusinessJsonLd() {
   const data = {
     "@context": "https://schema.org",
+    // Plumber is a subtype of LocalBusiness, so this satisfies both.
     "@type": "Plumber",
+    "@id": `${SITE.url}/#business`,
     name: SITE.name,
     image: `${SITE.url}/og.jpg`,
     url: SITE.url,
@@ -12,14 +14,16 @@ export function LocalBusinessJsonLd() {
     email: SITE.email,
     address: {
       "@type": "PostalAddress",
-      addressRegion: "BC",
-      addressLocality: "Coquitlam",
-      addressCountry: "CA",
+      streetAddress: SITE.address.street,
+      addressLocality: SITE.address.city,
+      addressRegion: SITE.address.region,
+      postalCode: SITE.address.postalCode,
+      addressCountry: SITE.address.country,
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 49.2968047,
-      longitude: -122.8089641,
+      latitude: SITE.address.lat,
+      longitude: SITE.address.lng,
     },
     areaServed: SERVICE_AREA.map((c) => ({
       "@type": "City",
