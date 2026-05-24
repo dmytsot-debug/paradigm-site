@@ -29,10 +29,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = SERVICES.find((s) => s.slug === slug);
   if (!service) return {};
+  const path = `/services/${slug}`;
   return {
     title: service.title,
     description: service.short,
+    alternates: { canonical: path },
     openGraph: {
+      url: path,
       title: `${service.title} · ${SITE.shortName}`,
       description: service.short,
     },

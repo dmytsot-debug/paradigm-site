@@ -7,9 +7,11 @@ import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "About — Meet Jon and the Paradigm team",
+  title: "About: meet Jon and the Paradigm team",
   description:
     "Paradigm Services is owner-operated by Jon, a licensed tradesperson serving Metro Vancouver. Learn what we stand for and how we work.",
+  alternates: { canonical: "/about" },
+  openGraph: { url: "/about", title: "About Paradigm Services" },
 };
 
 const VALUES = [

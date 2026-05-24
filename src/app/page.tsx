@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { AboutSnippet } from "@/components/sections/AboutSnippet";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
@@ -11,6 +12,11 @@ import {
   localBusinessSchema,
   websiteSchema,
 } from "@/components/seo/JsonLd";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { url: "/" },
+};
 
 export default function HomePage() {
   return (

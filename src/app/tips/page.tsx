@@ -7,9 +7,11 @@ import { CtaStrip } from "@/components/sections/CtaStrip";
 import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Tips — Practical home plumbing &amp; gas know-how",
+  title: "Tips: practical home plumbing & gas know-how",
   description:
-    "Short, practical guides from Paradigm Services — water heaters, emergencies, what to know before a service call.",
+    "Short, practical guides from Paradigm Services on water heaters, emergencies, and what to know before a service call.",
+  alternates: { canonical: "/tips" },
+  openGraph: { url: "/tips", title: "Tips from Paradigm Services" },
 };
 
 export default function TipsPage() {

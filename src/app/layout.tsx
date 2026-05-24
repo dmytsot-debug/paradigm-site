@@ -22,7 +22,8 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.shortName} — Plumbing, Gas & Drain Services · Metro Vancouver`,
+    // Home title kept tight (53 chars) and brand-first so it survives SERP truncation.
+    default: `${SITE.shortName} · Plumbing, Gas & Drains · Metro Vancouver`,
     template: `%s · ${SITE.shortName}`,
   },
   description: SITE.description,
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: SITE.shortName,
     url: SITE.url,
-    title: `${SITE.shortName} — Reliable Plumbing, Drain & Gas Services`,
+    title: `${SITE.shortName}: reliable plumbing, drain & gas in Metro Vancouver`,
     description: SITE.description,
     locale: "en_CA",
   },
@@ -50,7 +51,10 @@ export const metadata: Metadata = {
     title: SITE.shortName,
     description: SITE.description,
   },
-  alternates: { canonical: SITE.url },
+  // NOTE: no global canonical. Each page declares its own via
+  // alternates.canonical in its own metadata. A global canonical pointing
+  // to "/" makes Google treat every subpage as a home-page duplicate and
+  // drops them from the index.
 };
 
 export const viewport: Viewport = {

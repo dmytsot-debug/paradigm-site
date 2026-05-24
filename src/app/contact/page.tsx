@@ -7,9 +7,11 @@ import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { SITE } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Contact — Request an estimate",
+  title: "Contact: request an estimate",
   description:
     "Request an estimate from Paradigm Services. Call 778-938-5311 or send us a message. 24/7 emergency service across Metro Vancouver.",
+  alternates: { canonical: "/contact" },
+  openGraph: { url: "/contact", title: "Contact Paradigm Services" },
 };
 
 export default function ContactPage() {

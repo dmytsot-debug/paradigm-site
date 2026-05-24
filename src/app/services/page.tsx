@@ -11,9 +11,12 @@ import {
 } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Services — Plumbing, Gas, Drains, Water Heaters, Electrical",
+  // Title kept under 60 chars to survive SERP truncation.
+  title: "Services: plumbing, gas, drains, water heaters",
   description:
     "Paradigm Services offers plumbing, gas fitting, drain cleaning, water heater service, emergency response, and electrical work across Metro Vancouver.",
+  alternates: { canonical: "/services" },
+  openGraph: { url: "/services", title: "Paradigm Services" },
 };
 
 export default function ServicesIndexPage() {

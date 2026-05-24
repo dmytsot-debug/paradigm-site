@@ -217,7 +217,7 @@ export const SERVICES: Service[] = [
     slug: "electrical",
     title: "Electrical Services",
     short:
-      "Residential electrical work — outlets, lighting, panel changes, EV chargers, and troubleshooting — by licensed electricians.",
+      "Residential electrical work: outlets, lighting, panel changes, EV chargers, and troubleshooting by licensed electricians.",
     long: [
       "We handle residential electrical alongside our plumbing and gas work, so if you're renovating a kitchen or a bathroom we can keep the trades coordinated under one roof.",
       "From a single new outlet to a panel upgrade, every job is permitted where required and inspected to BC Electrical Code.",

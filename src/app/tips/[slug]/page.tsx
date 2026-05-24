@@ -25,7 +25,19 @@ export async function generateMetadata({
   const { slug } = await params;
   const tip = TIPS.find((t) => t.slug === slug);
   if (!tip) return {};
-  return { title: tip.title, description: tip.excerpt };
+  const path = `/tips/${slug}`;
+  return {
+    title: tip.title,
+    description: tip.excerpt,
+    alternates: { canonical: path },
+    openGraph: {
+      url: path,
+      type: "article",
+      title: tip.title,
+      description: tip.excerpt,
+      publishedTime: tip.date,
+    },
+  };
 }
 
 export default async function TipPage({
