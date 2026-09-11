@@ -6,7 +6,7 @@ import { ServiceAreaFallback } from "./ServiceAreaMap";
 /** If the embed hasn't fired onLoad within this window, assume it's stuck
  *  (bad key, network block, Google outage) and fall back rather than show
  *  an indefinite spinner. */
-const LOAD_TIMEOUT_MS = 8000;
+const LOAD_TIMEOUT_MS = 12000;
 
 export function GoogleServiceAreaMap({
   apiKey,
@@ -52,7 +52,6 @@ export function GoogleServiceAreaMap({
             ? "absolute inset-0 w-full h-full border-0"
             : "sr-only"
         }
-        loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         onLoad={() => setStatus("loaded")}
         onError={() => setStatus("error")}
