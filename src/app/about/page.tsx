@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { User, ShieldCheck, Wrench, MapPin } from "lucide-react";
+import { ShieldCheck, Wrench, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { CtaStrip } from "@/components/sections/CtaStrip";
@@ -69,15 +69,18 @@ export default function AboutPage() {
       <section className="py-16 lg:py-24">
         <div className="container-prose grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           <ScrollReveal as="div" className="lg:col-span-5">
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-100 to-brand-blue-300 dark:from-brand-blue-700 dark:to-brand-blue-900 flex items-center justify-center">
-              <User
-                className="size-40 text-brand-blue-700/40 dark:text-white/30"
-                strokeWidth={0.5}
-              />
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-100 to-brand-blue-300 dark:from-brand-blue-700 dark:to-brand-blue-900 flex flex-col items-center justify-center text-center p-8">
+              <span className="font-display text-2xl font-bold text-brand-blue-900 dark:text-white">
+                Jon
+              </span>
+              <span className="mt-2 text-xs uppercase tracking-widest text-brand-orange font-semibold">
+                Owner &amp; Lead Technician
+              </span>
+              <p className="mt-4 text-sm text-foreground-muted leading-relaxed">
+                The person on the other end of the phone — not a national
+                call center, not a dispatcher with no context.
+              </p>
             </div>
-            <p className="mt-3 text-xs text-foreground-faint">
-              Portrait placeholder · swap with jon-portrait.jpg
-            </p>
           </ScrollReveal>
           <ScrollReveal
             as="div"

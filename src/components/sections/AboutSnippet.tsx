@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, User } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export function AboutSnippet() {
@@ -7,11 +7,17 @@ export function AboutSnippet() {
     <section className="py-16 lg:py-24">
       <div className="container-prose grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <ScrollReveal as="div" className="lg:col-span-5">
-          <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-100 to-brand-blue-300 dark:from-brand-blue-700 dark:to-brand-blue-900 relative">
-            <PortraitPlaceholder />
-            <div className="absolute bottom-4 left-4 right-4 text-[10px] uppercase tracking-wider text-foreground-muted">
-              Portrait placeholder · jon-portrait.jpg
-            </div>
+          <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-100 to-brand-blue-300 dark:from-brand-blue-700 dark:to-brand-blue-900 relative flex flex-col items-center justify-center text-center p-8">
+            <span className="font-display text-2xl font-bold text-brand-blue-900 dark:text-white">
+              Jon
+            </span>
+            <span className="mt-2 text-xs uppercase tracking-widest text-brand-orange font-semibold">
+              Owner &amp; Lead Technician
+            </span>
+            <p className="mt-4 text-sm text-foreground-muted leading-relaxed">
+              When you call, you reach Jon or someone on his small team —
+              not a national call center.
+            </p>
           </div>
         </ScrollReveal>
 
@@ -68,13 +74,5 @@ export function AboutSnippet() {
         </ScrollReveal>
       </div>
     </section>
-  );
-}
-
-function PortraitPlaceholder() {
-  return (
-    <div className="w-full h-full flex items-center justify-center text-brand-blue-700/40 dark:text-white/30">
-      <User className="size-40" strokeWidth={0.5} />
-    </div>
   );
 }

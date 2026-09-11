@@ -141,7 +141,7 @@ export function Hero() {
                   alt="Paradigm Services branded service truck with mountain backdrop"
                   fill
                   priority
-                  sizes="(max-width: 1024px) 90vw, 560px"
+                  sizes="(max-width: 1024px) 90vw, 750px"
                   className="object-cover"
                 />
               </div>

@@ -1,31 +1,38 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
-import { Loader2, MapPin } from "lucide-react";
-import { SERVICE_AREA } from "@/content/service-area";
+import { MapPin } from "lucide-react";
+import { SERVICE_AREA, SERVICE_AREA_VIEW } from "@/content/service-area";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { GoogleServiceAreaMap } from "./GoogleServiceAreaMap";
 
-const LeafletServiceMap = dynamic(() => import("./LeafletServiceMap"), {
-  ssr: false,
-  loading: () => <MapSkeleton />,
-});
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
-function MapSkeleton() {
+/** Static, non-interactive fallback: same footprint as the map, shown
+ *  whenever we don't have an API key or the embed fails/times out. */
+export function ServiceAreaFallback() {
   return (
-    <div className="absolute inset-0 rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-100 to-brand-blue-300/40 dark:from-brand-blue-800/60 dark:to-brand-blue-700/40 flex flex-col items-center justify-center gap-3 text-foreground-muted">
-      <Loader2 className="size-6 animate-spin" />
-      <span className="text-sm">Loading map…</span>
+    <div className="absolute inset-0 rounded-2xl overflow-hidden bg-gradient-to-br from-brand-blue-100 to-brand-blue-300/40 dark:from-brand-blue-800/60 dark:to-brand-blue-700/40 p-6 flex flex-col">
+      <p className="text-sm font-semibold text-foreground">
+        Metro Vancouver service area
+      </p>
+      <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm overflow-y-auto">
+        {SERVICE_AREA.map((c) => (
+          <li key={c.name} className="inline-flex items-center gap-1.5 text-foreground-muted">
+            <MapPin className="size-3.5 text-brand-orange/70 shrink-0" />
+            {c.name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 export function ServiceAreaMap() {
-  const [active, setActive] = useState<string | null>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  // Defer Leaflet bundle + tile fetches until the section is near the viewport.
+  // Defer the map embed request until the section is near the viewport.
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
@@ -64,11 +71,14 @@ export function ServiceAreaMap() {
               ref={wrapRef}
               className="relative aspect-[4/3] bg-surface rounded-2xl border border-border shadow-sm overflow-hidden"
             >
-              {shouldLoad ? (
-                <LeafletServiceMap activeCity={active} />
-              ) : (
-                <MapSkeleton />
-              )}
+              {!GOOGLE_MAPS_API_KEY ? (
+                <ServiceAreaFallback />
+              ) : shouldLoad ? (
+                <GoogleServiceAreaMap
+                  apiKey={GOOGLE_MAPS_API_KEY}
+                  center={SERVICE_AREA_VIEW}
+                />
+              ) : null}
             </div>
           </div>
 
@@ -77,16 +87,10 @@ export function ServiceAreaMap() {
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-[15px]">
               {SERVICE_AREA.map((c) => (
                 <li key={c.name}>
-                  <button
-                    onMouseEnter={() => setActive(c.name)}
-                    onMouseLeave={() => setActive(null)}
-                    onFocus={() => setActive(c.name)}
-                    onBlur={() => setActive(null)}
-                    className="text-left text-foreground hover:text-brand-orange transition-colors inline-flex items-center gap-2"
-                  >
+                  <span className="text-foreground inline-flex items-center gap-2">
                     <MapPin className="size-3.5 text-brand-orange/70" />
                     {c.name}
-                  </button>
+                  </span>
                 </li>
               ))}
             </ul>

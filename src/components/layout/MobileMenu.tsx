@@ -36,7 +36,8 @@ export function MobileMenu() {
         type="button"
         onClick={() => setOpen(true)}
         className="md:hidden inline-flex items-center justify-center size-10 rounded-md border border-border-strong bg-surface"
-        aria-label="Open menu"
+        aria-expanded={open}
+        aria-label={open ? "Close menu" : "Open menu"}
       >
         <Menu className="size-5" />
       </button>

@@ -259,6 +259,7 @@ export const SERVICES_GRID = [
   SERVICES.find((s) => s.slug === "gas-fitting")!,
   SERVICES.find((s) => s.slug === "emergency")!,
   SERVICES.find((s) => s.slug === "drain-cleaning")!,
+  SERVICES.find((s) => s.slug === "electrical")!,
 ];
 
 export const SERVICE_ICON_OVERRIDES: Record<string, LucideIcon> = {

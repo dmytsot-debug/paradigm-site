@@ -18,7 +18,7 @@ export function ServicesGrid() {
             Services for homes, businesses &amp; strata
           </h2>
           <p className="mt-4 text-foreground-muted text-lg">
-            Five core service lines, delivered by licensed tradespeople across
+            Six core service lines, delivered by licensed tradespeople across
             Metro Vancouver.
           </p>
         </div>
